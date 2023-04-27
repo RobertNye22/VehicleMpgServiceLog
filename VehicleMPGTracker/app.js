@@ -18,6 +18,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+//new
+app.use(express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
+//--------------------
+//run database connection and creation logic
+var dbCon = require('./lib/database.js');
+//--------------------
+
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
