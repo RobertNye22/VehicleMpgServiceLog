@@ -14,15 +14,15 @@ var con = mysql.createConnection({
 con.connect(function(err) {
     if (err) throw err;
     console.log("Connected to DB!");
-    con.query("CREATE DATABASE IF NOT EXISTS VehicleMPGTracker", function (err, result) {
+    con.query("CREATE DATABASE IF NOT EXISTS AutoLogix", function (err, result) {
         if (err) throw err;
-        console.log("Database created");
+        console.log("AutoLogix Database created");
         selectDatabase();
     });
 });
 
 function selectDatabase() {
-    con.query("USE VehicleMPGTracker", function (err, result) {
+    con.query("USE AutoLogix", function (err, result) {
         if (err) throw err;
         console.log("Database selected");
         createTables();
@@ -71,22 +71,40 @@ function createTables() {
       }
     });
 
-    sql =       "CREATE TABLE IF NOT EXISTS upgrade (\n" +
-                "UpgradeID INT NOT NULL AUTO_INCREMENT,\n" +
-                "UpgradeDate DATE NOT NULL,\n" +
-                "UpgradePartType VARCHAR(25) NOT NULL,\n" +
-                "UpgradePartName VARCHAR(25) NOT NULL,\n" +
-                "UpgradeCurrentMilage DECIMAL NOT NULL,\n" +
-                "VehicleID INT NOT NULL,\n" +
-                "PRIMARY KEY (UpgradeID),\n" +
-                "FOREIGN KEY (VehicleID) REFERENCES vehicle(VehicleID)\n" +
+    sql =       "CREATE TABLE IF NOT EXISTS maintenance_type (\n" +
+                "MaintenanceTypeID INT NOT NULL AUTO_INCREMENT,\n" +
+                "MaintenanceTypeName VARCHAR(45) NOT NULL,\n" +
+                "MaintenanceTypeDescription VARCHAR(255),\n" +
+                "MaintenanceTypeFrequency INT,\n" +
+                "PRIMARY KEY (MaintenanceTypeID)\n" +
               ")";
     con.execute(sql, function(err, results, fields) {
       if (err) {
         console.log(err.message);
         throw err;
       } else {
-        console.log("database.js: table Upgrade created if it didn't exist");
+        console.log("database.js: table Maintenance_Type created if it didn't exist");
+      }
+    });
+
+    sql =       "CREATE TABLE IF NOT EXISTS maintenance_log (\n" +
+                "MaintenanceLogID INT NOT NULL AUTO_INCREMENT,\n" +
+                "MaintenanceCurrentMilage DECIMAL NOT NULL,\n" +
+                "MaintenanceNextMilage DECIMAL,\n" +
+                "MaintenanceDate DATE NOT NULL,\n" +
+                "MaintenanceNotes LONGTEXT,\n" +
+                "VehicleID INT NOT NULL,\n" +
+                "MaintenanceTypeID INT NOT NULL,\n" +
+                "PRIMARY KEY (MaintenanceLogID),\n" +
+                "FOREIGN KEY (VehicleID) REFERENCES vehicle(VehicleID),\n" +
+                "FOREIGN KEY (MaintenanceTypeID) REFERENCES maintenance_type(MaintenanceTypeID)\n" +
+              ")";
+    con.execute(sql, function(err, results, fields) {
+      if (err) {
+        console.log(err.message);
+        throw err;
+      } else {
+        console.log("database.js: table Maintenance_Log created if it didn't exist");
       }
     });
 
@@ -95,6 +113,7 @@ function createTables() {
                 "FillUpDate DATE NOT NULL,\n" +
                 "FillUpGallons DECIMAL NOT NULL,\n" +
                 "FillUpCurrentMilage DECIMAL NOT NULL,\n" +
+                "FillUpNextMilage DECIMAL,\n" +
                 "VehicleID INT NOT NULL,\n" +
                 "PRIMARY KEY (FillUpID),\n" +
                 "FOREIGN KEY (VehicleID) REFERENCES vehicle(VehicleID)\n" +
@@ -105,6 +124,25 @@ function createTables() {
         throw err;
       } else {
         console.log("database.js: table FillUp created if it didn't exist");
+      }
+    });
+
+    sql =       "CREATE TABLE IF NOT EXISTS part (\n" +
+                "PartID INT NOT NULL AUTO_INCREMENT,\n" +
+                "PartName VARCHAR(45) NOT NULL,\n" +
+                "PartDescription VARCHAR(255),\n" +
+                "PartCost DECIMAL,\n" +
+                "PartSupplier VARCHAR(45),\n" +
+                "PartManufacturer VARCHAR(45),\n" +
+                "PartNumber VARCHAR(255),\n" +
+                "PRIMARY KEY (PartID)\n" +
+              ")";
+    con.execute(sql, function(err, results, fields) {
+      if (err) {
+        console.log(err.message);
+        throw err;
+      } else {
+        console.log("database.js: table Part created if it didn't exist");
       }
     });
 

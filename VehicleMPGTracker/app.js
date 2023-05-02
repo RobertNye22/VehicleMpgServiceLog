@@ -31,6 +31,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 //new
 app.use(express.static(path.join(__dirname, 'node_modules/bootstrap/dist')));
+app.use(express.static(path.join(__dirname, "node_modules/bootstrap-icons/")));
 //--------------------
 //run database connection and creation logic
 var dbCon = require('./lib/database.js');
