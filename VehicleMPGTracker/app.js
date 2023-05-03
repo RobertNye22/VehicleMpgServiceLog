@@ -7,10 +7,10 @@ var session = require('express-session'); //new
 
 var indexRouter = require('./routes/index');
 var dashboardRouter = require('./routes/dashboard');
-var fillUpRouter = require('./routes/fillup');
-var fillUpHistoryRouter = require('./routes/filluphistory');
-var logRouter = require('./routes/log');
-var logHistoryRouter = require('./routes/loghistory');
+var fuelEntryRouter = require('./routes/fuelentry');
+var fuelHistoryRouter = require('./routes/fuelhistory');
+var maintenanceRouter = require('./routes/maintenance');
+var maintenanceHistoryRouter = require('./routes/maintenancehistory');
 var vehicleRouter = require('./routes/vehicle');
 var loginRouter = require('./routes/login');
 var registerRouter = require('./routes/register');
@@ -63,13 +63,13 @@ app.use(function (req, res, next) {
 
 app.use('/', indexRouter);
 app.use('/dashboard', dashboardRouter);
-app.use('/fillup', fillUpRouter);
-app.use('/filluphistory', fillUpHistoryRouter);
-app.use('/log', logRouter);
-app.use('/loghistory', logHistoryRouter);
 app.use('/vehicle', vehicleRouter);
 app.use('/login', loginRouter);
 app.use('/register', registerRouter);
+app.use('/maintenance', maintenanceRouter);
+app.use('/maintenancehistory', maintenanceHistoryRouter);
+app.use('/fuelentry', fuelEntryRouter);
+app.use('/fuelhistory', fuelHistoryRouter);
 
 
 // catch 404 and forward to error handler
