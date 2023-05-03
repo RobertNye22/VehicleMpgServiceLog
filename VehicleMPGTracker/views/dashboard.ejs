@@ -24,11 +24,12 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
+        
         <li class="nav-item">
-          <a class="nav-link text-white" href="filluphistory">Fill History</a>
+          <a class="nav-link text-white" href="filluphistory">Fuel History</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="loghistory">Service History</a>
+          <a class="nav-link text-white" href="loghistory">Maintenance History</a>
         </li>
         <li class="nav-item d-md-none">
           <a class="nav-link text-white" href="/register">Logout</a>
@@ -50,23 +51,37 @@
 
   <div class="container">
     <div class="row">
-      <div class="col-sm-4 mt-3">
-        <div class="card shadow bg-light mt-3">
-          <button class="btn btn-dark btn-block" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-            Vehicle Information
-          </button>
-          <div class="collapse" id="collapseExample">
-            <div class="card card-body">
-              <p class="card-text">Make: <span id="make">Jeep</span></p>
-              <p class="card-text">Model: <span id="model">CJ7</span></p>
-              <p class="card-text">Year: <span id="year">1983</span></p>
-              <p class="card-text">Current Mileage: <span id="currentMileage">260,414</span></p>
+      <div class="col mt-3 justify-content-center">
+        <div class="card border-info shadow bg-light mt-3">
+          <div class="card-header">
+            My Vehicle
+          </div>
+          <div class="container">
+            <div class="row m-2">
+              <div class="col-6">
+                <p class="card-text">Make: <span id="make">Jeep</span></p>
+                <p class="card-text">Model: <span id="model">CJ7</span></p>
+              </div>
+              <div class="col-6">
+                <p class="card-text">Year: <span id="year">1983</span></p>
+                <p class="card-text">Tank Size: <span id="tankSize">13</span> gallons</p>
+              </div>
             </div>
           </div>
         </div>
-        
+      </div>
+    </div>
+    <hr class="featurette-divider text-light mt-5" />
+
+
+    <div class="row mb-5">
+      <div class="col-sm-4 mt-3">
+        <a href="fillup" class="btn btn-info w-100 mt-3">New Fuel Entry</a>
         <!-- for increase -->
         <div class="card border-success shadow bg-light mt-3 d-none" id="increase">
+          <div class="card-header">
+            Fuel
+          </div>
           <div class="card-body">
             <h5 class="card-title pb-2">Current MPG: <span id="currentMPG">14.2</span>
               <span id="mpgArrow"><i class="bi bi-arrow-up-square-fill float-right text-success"></i></span>
@@ -77,6 +92,9 @@
         </div>
         <!-- for neutral -->
         <div class="card border-info shadow bg-light mt-3 d-none" id="neutral">
+          <div class="card-header">
+            Fuel
+          </div>
           <div class="card-body">
             <h5 class="card-title pb-2">Current MPG: <span id="currentMPG">14.2</span>
               <span id="mpgArrow"><i class="bi bi-dash-square-fill float-right text-info"></i></span>
@@ -87,6 +105,9 @@
         </div>
         <!-- for decrease -->
         <div class="card border-danger shadow bg-light mt-3 d-none" id="decrease">
+          <div class="card-header">
+            Fuel
+          </div>
           <div class="card-body">
             <h5 class="card-title pb-2">Current MPG: <span id="currentMPG">14.1</span>
               <span id="mpgArrow"><i class="bi bi-arrow-down-square-fill float-right text-danger"></i></span>
@@ -97,7 +118,6 @@
         </div>
       </div>
       <div class="col-sm-8 mt-3">
-  
         <div class="card shadow bg-light mt-3">
           <div class="card-header">
             <div class="dropdown">
@@ -115,17 +135,31 @@
             <canvas id="myChart"></canvas>
           </div>
         </div>
-        
+      </div>
+    </div>
+
+
+    <hr class="featurette-divider text-light mt-5" />
+    <div class="row">
+      <div class="col-sm-4 mt-3">
+        <a href="log" class="btn btn-info w-100 mt-3">New Maintenance Entry</a>
+        <div class="card border-info shadow bg-light mt-3">
+          <div class="card-header">
+            Maintenance
+          </div>
+          <div class="card-body">
+            <p>Last Maintenance: <span id="lastMaintenance">Oil Change</span></p>
+            <p>Upcoming Maintenance: <span id="upcomingMaintenance">Tire Rotation</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-8 mt-3">
         <div class="card shadow bg-light mt-3">
           <div class="card-body">
             <canvas id="servicesChart"></canvas>
           </div>
         </div>
       </div>
-
-      
-      
-  
     </div>
   </div>
 
@@ -191,7 +225,7 @@
       labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
       datasets: [{
         label: 'MPG',
-        data: [0, 10, 5, 2, 20, 30, 45],
+        data: [13.2, 13.1, 12.8, 12.9, 13.0, 13.1, 13.2, 13.3, 13.4, 13.5, 13.6, 13.7],
         borderColor: 'rgba(128, 128, 128, .2)',
         borderWidth: 1,
         pointBackgroundColor: (context) => {
@@ -201,13 +235,13 @@
 
           if (index === 0) {
             // First point, no previous value to compare to
-            return 'rgb(128, 128, 128)';
+            return 'rgba(128, 128, 128, .6)';
           } else if (value > previousValue) {
             // Value increased from previous point
-            return 'green';
+            return 'rgba(143, 242, 51)';
           } else if (value < previousValue) {
             // Value decreased from previous point
-            return 'red';
+            return 'rgba(242, 64, 51)';
           } else {
             // Value is the same as previous point
             return 'gray';
@@ -257,7 +291,7 @@
         datasets: [{
           label: 'Frequency of Services',
           data: serviceData.map(service => service.frequency),
-          backgroundColor: 'rgba(43, 194, 240, .6)',
+          backgroundColor: 'rgba(45, 252, 149, .6)',
           borderWidth: 1
         }]
       },

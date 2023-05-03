@@ -37,6 +37,8 @@ function createTables() {
                 "UserFirstName VARCHAR(25) NOT NULL,\n" +
                 "UserLastName VARCHAR(25) NOT NULL,\n" +
                 "UserName VARCHAR(35) NOT NULL,\n" +
+                "UserEmail VARCHAR(255) NOT NULL,\n" +
+                "UserPhoneNumber VARCHAR(25),\n" +
                 "UserHashedPassword VARCHAR(255) NOT NULL,\n" +
                 "UserSalt VARCHAR(255) NOT NULL,\n" +
                 "PRIMARY KEY (UserID)\n" +
