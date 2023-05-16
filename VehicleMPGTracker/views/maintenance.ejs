@@ -50,7 +50,7 @@
 
   <div class="row mb-5 bg-custom shadow-lg">
       <div class="col-12 text-center">
-        <h3 class="p-3">M A I N T A N A N C E&nbsp;&nbsp;&nbsp;E N T R Y&nbsp;&nbsp;&nbsp;<i class="bi bi-wrench"></i></h3>
+        <h3 class="p-3">M A I N T A N A N C E<br>E N T R Y&nbsp;&nbsp;&nbsp;<i class="bi bi-wrench"></i></h3>
       </div>
   </div>
   
@@ -99,7 +99,7 @@
                     name="date"
                     type="date"
                     class="form-control"
-                    value="<%= new Date().toISOString().substr(0, 10) %>"
+                    value=""
                     placeholder="Date"
                     required
                   />
@@ -123,7 +123,7 @@
                 </div>
               </div>
               
-              <div class="rounded">
+              <div class="rounded mb-4">
                 <p>Select Maintenance Category: *</p>
                 <div class="input-group mb-3">
                   <span class="input-group-text bg-custom">
@@ -143,10 +143,10 @@
                 </div>
               </div>
 
-              
+              <div id="cardContainer" class="container">
                 <div class="row mb-4">
                   <div class="col-12">
-                    <div class="card">
+                    <div class="card border-info">
                       <div class="card-header">
                         Enter Part Info
                       </div>
@@ -216,7 +216,11 @@
                     </div>
                   </div>
                 </div>
+              </div>
               
+              <div class="text-center mb-3">
+                <button id="addCardButton" class="btn btn-info mt-2" type="button">Add Another Part</button>
+              </div>
               <div class="text-center">
                 <button class="btn btn-info mt-2" type="submit">
                   Done
@@ -279,6 +283,121 @@
       });
     });
   </script>
+
+<script>
+  // Variables for card index and container
+  let cardIndex = 0;
+  const cardContainer = document.getElementById("cardContainer");
+  const addCardButton = document.getElementById("addCardButton");
+
+  // Function to add a new card
+  function addCard() {
+    // Create a new card element
+    const newCard = document.createElement("div");
+    newCard.className = "div .row mb-4";
+    newCard.innerHTML = `
+                    <div>
+                      <div class="card border-info">
+                        <div class="card-header d-flex justify-content-between align-items-center">
+                          Enter Part Info
+                          <button class="btn btn-danger delete-card-btn" data-card-index="${cardIndex}">Delete</button>
+                        </div>
+                        <div class="row m-2">
+                          <div class="col-12">
+                            <p>Part Name: *</p>
+                            <div class="input-group">
+                              <span class="input-group-text bg-custom">
+                                <i class="bi bi-caret-right-fill text-white"></i>
+                              </span>
+                              <input id="name${cardIndex}" name="name${cardIndex}" type="text" class="form-control" placeholder="Part Name" required />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row m-2">
+                          <div class="col-12">
+                            <p>Part Description:</p>
+                            <div class="input-group">
+                              <span class="input-group-text bg-custom">
+                                <i class="bi bi-caret-right-fill text-white"></i>
+                              </span>
+                              <input id="partDescription${cardIndex}" name="partDescription${cardIndex}" type="text" class="form-control" placeholder="Part Description"/>
+                              <!-- <textarea name="partDescription" id="partDescription" cols="30" rows="10" class="form-control" placeholder="Part Description"></textarea> -->
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row m-2">
+                          <div class="col-6">
+                            <p>Part Cost:</p>
+                            <div class="input-group">
+                              <span class="input-group-text bg-custom">
+                                <i class="bi bi-currency-dollar text-white"></i>
+                              </span>
+                              <input id="cost${cardIndex}" name="cost${cardIndex}" type="text" class="form-control" placeholder="Cost"/>
+                            </div>
+                          </div>
+                          <div class="col-6">
+                            <p>Part Number:</p>
+                            <div class="input-group">
+                              <span class="input-group-text bg-custom">
+                                <i class="bi bi-currency-dollar text-white"></i>
+                              </span>
+                              <input id="number${cardIndex}" name="number${cardIndex}" type="text" class="form-control" placeholder="Part Number"/>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="row m-2 mb-4">
+                          <div class="col-6">
+                            <p>Part Supplier:</p>
+                            <div class="input-group">
+                              <span class="input-group-text bg-custom">
+                                <i class="bi bi-caret-right-fill text-white"></i>
+                              </span>
+                              <input id="partSupplier${cardIndex}" name="partSupplier${cardIndex}" type="text" class="form-control" placeholder="Part Supplier"/>
+                            </div>
+                          </div>
+                          <div class="col-6">
+                            <p>Part Manufacturer:</p>
+                            <div class="input-group">
+                              <span class="input-group-text bg-custom">
+                                <i class="bi bi-caret-right-fill text-white"></i>
+                              </span>
+                              <input id="partManufacturer${cardIndex}" name="partManufacturer${cardIndex}" type="text" class="form-control" placeholder="Part Manufacturer"/>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                  `;
+
+    // Append the new card to the container
+    cardContainer.appendChild(newCard);
+
+    // Increment the card index
+    cardIndex++;
+  }
+
+  // Function to delete a card
+  function deleteCard(cardIndex) {
+    const cardToDelete = document.querySelector(`.card .delete-card-btn[data-card-index="${cardIndex}"]`).closest(".card");
+    if (cardToDelete) {
+      cardToDelete.remove();
+    }
+  }
+
+  // Event listener for adding a card
+  addCardButton.addEventListener("click", addCard);
+
+  // Event listener for deleting a card
+  cardContainer.addEventListener("click", function(event) {
+    if (event.target.classList.contains("delete-card-btn")) {
+      const cardIndexToDelete = event.target.dataset.cardIndex;
+      deleteCard(cardIndexToDelete);
+    }
+  });
+
+</script>
+
   <style>
     .bg-custom {
       background-color: rgba(17, 214, 175);

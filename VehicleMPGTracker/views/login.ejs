@@ -1,11 +1,142 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
-  </body>
+<html lang="en">
+<head>
+	<title>sign-in</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<!-- Include Bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+	<style>
+		.content {
+			margin-top: 30px;
+		}
+	</style>
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+   <link rel="stylesheet" type="text/css" href="font/bootstrap-icons.css" />
+</head>
+<body class="bg-light">
+	<nav class="navbar navbar-expand-lg navbar-light bg-dark pt-3 pb-3">
+    <a class="navbar-brand text-white" href="dashboard">AutoLogix</a>
+    <div class="navbar-nav ml-auto ">
+      <li class="nav-item">
+        <a
+          class="nav-link text-white"
+          style="margin-left: 1rem; padding-right: 1rem"
+          href="/register"
+          >Register</a
+        >
+      </li>
+    </div>
+  </nav>
+
+  <div class="row mb-5 bg-custom shadow-lg">
+    <div class="col-12 text-center">
+      <h3 class="pt-3 pb-3">S I G N &nbsp; I N&nbsp;&nbsp;&nbsp;<i class="bi bi-person-circle"></i></h3>
+    </div>
+</div>
+  
+
+  <div class="container">
+    
+    <div class="row mb-5">
+      <div class="col-12">
+        <div class="card shadow">
+          <div class="card-body bg-light">
+            <form action="/login" method="post">
+              <div class="rounded">
+                <p>Enter Email: *</p>
+                <div class="input-group mb-3">
+                  <span class="input-group-text bg-custom">
+                    <i class="bi bi-person-fill text-white"></i>
+                  </span>
+                  <input
+                    id="email"
+                    name="email"
+                    type="text"
+                    class="form-control"
+                    placeholder="Email"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="rounded">
+                <p>Enter Password: *</p>
+                <div class="input-group mb-3">
+                  <span class="input-group-text bg-custom">
+                    <i class="bi bi-lock-fill text-white"></i>
+                  </span>
+                  <input
+                    id="password"
+                    name="password"
+                    type="password"
+                    class="form-control"
+                    placeholder="Password"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="text-center">
+                <button class="btn btn-info mt-2" type="submit">
+                  Submit
+                </button>
+              </div>
+            </form>
+          </div>
+          <div id="errorMessage" class="bg-light">
+            <p id="message" class="text-danger bg-light" style="height: 20px">
+              <%- locals.message %>
+            </p>
+          </div>
+          <div class="bg-light">
+            <p class="text-center">Don't have an account? <a href="/register">Register</a></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <hr class="featurette-divider text-light mt-5" />
+  
+  <div class="container-sm mt-3">
+    <footer>
+      <div class="row text-dark text-center">
+        <div class="col-12 text-center mx-auto mt-3">
+          <h2 class="text-secondary">About AutoLogix</h2>
+          <p>
+            <br>
+            AutoLogix is designed to help vehicle owners keep track of their vehicle's fuel efficiency and maintenance needs in one easy-to-use platform.
+            Our mission is to help vehicle owners save money and reduce their environmental impact by providing them with the tools and resources they need to make informed decisions about their vehicle's fuel efficiency and maintenance.
+            Our application allows users to track their vehicle's fuel consumption, calculate their MPG, and receive personalized recommendations for improving their vehicle's fuel efficiency. 
+            Users can also log their vehicle's maintenance history, set reminders for upcoming maintenance tasks, and receive alerts when maintenance is due.
+            We are committed to providing our users with a seamless and user-friendly experience, and we are constantly working to improve and enhance our application based on user feedback and the latest industry trends.
+            Thank you for choosing AutoLogix. We look forward to helping manage your vehicle needs! 
+          </p>
+        </div>
+      </div>
+      <div class="row text-dark">
+        <div class="col">
+          <h3 class="text-center text-secondary">Contact Us</h3>
+          <div>
+            <h5><b>Email</b></h5>
+            <p>eastonnye@gmail.com</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+	<!-- Include jQuery and Bootstrap JS -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <style>
+    .bg-custom {
+      background-color: rgba(17, 214, 175);
+    }
+  </style>
+</body>
 </html>

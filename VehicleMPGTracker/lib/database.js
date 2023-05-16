@@ -18,6 +18,7 @@ con.connect(function(err) {
         if (err) throw err;
         console.log("AutoLogix Database created");
         selectDatabase();
+
     });
 });
 
@@ -26,6 +27,7 @@ function selectDatabase() {
         if (err) throw err;
         console.log("Database selected");
         createTables();
+        //createStoredProcedures();
     });
 }
 
@@ -58,7 +60,7 @@ function createTables() {
                 "VehicleMake VARCHAR(25) NOT NULL,\n" +
                 "VehicleModel VARCHAR(25) NOT NULL,\n" +
                 "VehicleMilage DECIMAL NOT NULL,\n" +
-                "VehicleMPG DECIMAL NULL,\n" +
+                "VehicleMPG DECIMAL,\n" +
                 "VehicleTankSize DECIMAL NOT NULL,\n" +
                 "UserID INT NOT NULL,\n" +
                 "PRIMARY KEY (VehicleID),\n" +
@@ -147,9 +149,6 @@ function createTables() {
         console.log("database.js: table Part created if it didn't exist");
       }
     });
-
-
-
 }
 
 module.exports = con;
