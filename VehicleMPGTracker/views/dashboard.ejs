@@ -31,8 +31,23 @@
         <li class="nav-item">
           <a class="nav-link text-white" href="maintenancehistory">Maintenance History</a>
         </li>
+        
         <li class="nav-item d-md-none">
-          <a class="nav-link text-white" href="/register">Logout</a>
+          <a class="nav-link text-white" data-bs-toggle="collapse" href="#collapseName" role="button" aria-expanded="false" aria-controls="collapseName">NAME<%= locals.firstName %> <%= locals.lastName %></a>
+
+          <div class="collapse" id="collapseName">
+            <div class="card bg-dark border-light">
+              <div class="ml-2">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link text-white" href="/vehicle">My Vehicles</a>
+                    <a class="nav-link text-white" href="/register">Logout</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
         </li>
       </ul>
     </div>
@@ -42,7 +57,7 @@
           class="nav-link text-white"
           style="margin-left: 1rem; padding-right: 1rem"
           href="/register"
-          >Logout</a
+          >NAME</a
         >
       </li>
     </div>
